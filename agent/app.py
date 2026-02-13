@@ -5,10 +5,10 @@ import os
 from mcp import Resource
 from mcp.types import Prompt
 
-from agent.mcp_client import MCPClient
-from agent.dial_client import DialClient
-from agent.models.message import Message, Role
-from agent.prompts import SYSTEM_PROMPT
+from mcp_client import MCPClient
+from dial_client import DialClient
+from models.message import Message, Role
+from prompts import SYSTEM_PROMPT
 
 
 # https://remote.mcpservers.org/fetch/mcp

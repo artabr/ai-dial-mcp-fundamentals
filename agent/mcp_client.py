@@ -25,10 +25,16 @@ class MCPClient:
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        if self.session and self._session_context:
-            await self._session_context.__aexit__(exc_type, exc_val, exc_tb)
-        if self._streams_context:
-            await self._streams_context.__aexit__(exc_type, exc_val, exc_tb)
+        try:
+            if self.session and self._session_context:
+                await self._session_context.__aexit__(exc_type, exc_val, exc_tb)
+        except Exception as e:
+            print(f"Error closing session: {e}")
+        try:
+            if self._streams_context:
+                await self._streams_context.__aexit__(exc_type, exc_val, exc_tb)
+        except Exception as e:
+            print(f"Error closing streams: {e}")
 
     async def get_tools(self) -> list[dict[str, Any]]:
         """Get available tools from MCP server"""

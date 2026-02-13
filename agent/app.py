@@ -30,6 +30,10 @@ async def main():
         # Create DialClient
         api_key = os.getenv("DIAL_API_KEY", "")
         endpoint = os.getenv("DIAL_ENDPOINT", "")
+        if not endpoint:
+            raise RuntimeError("DIAL_ENDPOINT environment variable is not set. Please add it to your .env file.")
+        if not api_key:
+            raise RuntimeError("DIAL_API_KEY environment variable is not set. Please add it to your .env file.")
         dial_client = DialClient(api_key=api_key, endpoint=endpoint, tools=tools, mcp_client=mcp_client)
 
         # Create message list with system prompt
